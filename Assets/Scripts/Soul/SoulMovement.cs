@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class SoulMovement : MonoBehaviour
@@ -30,7 +31,7 @@ public class SoulMovement : MonoBehaviour
         transform.Translate(new Vector2(speed * moveHorizontal,0) * Time.deltaTime, Space.World);
         Jump();
         //jumpTimer();
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)

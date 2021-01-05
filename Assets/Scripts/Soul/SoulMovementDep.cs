@@ -15,7 +15,7 @@ public class SoulMovementDep : MonoBehaviour
     private Collider2D _collider;
     private float jumpMaxHeight; 
     private float soulHeight;
-    private JUMPSTATE _jumpstate;
+    [SerializeField] private JUMPSTATE _jumpstate;
     
     [SerializeField] private float speed = 2f;
     [SerializeField] private float jumpUpRate = 2f;
@@ -58,7 +58,7 @@ public class SoulMovementDep : MonoBehaviour
     {
         if (numberOfJumps > 0)
         {
-            if (Input.GetKey(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 jumpMaxHeight = soulHeight * maxBodiesJump + transform.position.y;
                 _jumpstate = JUMPSTATE.RISING;
