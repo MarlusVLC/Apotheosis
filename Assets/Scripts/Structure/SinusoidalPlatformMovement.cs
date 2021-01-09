@@ -64,7 +64,7 @@ public class SinusoidalPlatformMovement : MonoBehaviour
             : transform.position.y;
         
 
-        transform.position = new Vector2(_x, _y);
+        transform.position = new Vector3(_x, _y, transform.position.z);
     }
 
     private void OnDrawGizmos()

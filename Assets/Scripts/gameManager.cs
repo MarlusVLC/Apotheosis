@@ -51,9 +51,15 @@ public class gameManager : MonoBehaviour
 
     public void SetRespawnState(GameObject gameObject, Vector3 position, Vector3 velocity, float rotation)
     {
-        if (!_respawnStates.ContainsKey(gameObject))
+        RespawnState respawnState = new RespawnState(position, velocity, rotation);
+
+
+        if (_respawnStates.ContainsKey(gameObject))
         {
-            RespawnState respawnState = new RespawnState(position, velocity, rotation);
+            _respawnStates[gameObject] = respawnState;
+        }
+        else
+        {
             _respawnStates.Add(gameObject, respawnState);
         }
     }

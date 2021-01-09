@@ -72,6 +72,8 @@ public class MainMovement : MonoBehaviour
             _moveState = MoveState.Walking;
         }
         
+        DEBUGMarkCheckpoint();
+        
     }
 
     void FixedUpdate()
@@ -160,7 +162,17 @@ public class MainMovement : MonoBehaviour
         _rb.rotation = respawnState.Rotation;
         _rb.velocity = respawnState.Velocity;
     }
-    
+
+    private void DEBUGMarkCheckpoint()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.M)))
+        {
+            gameManager.getInstance.SetRespawnState(gameObject,transform.position, Vector3.zero, 0);
+            print("Checkpoint saved!");
+            print("Die as you wish :DDDD");
+        }
+    }
+
 
     public void EnableMoveDamping()
     {

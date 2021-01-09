@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Aux_Classes;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
@@ -53,7 +54,7 @@ public class TowerLightBehavior : MonoBehaviour
 
         if (gameManager.getInstance.IsTowerFocused && _isPlayerGettingIn)
         {
-            gameObject.transform.position = new Vector3(player.position.x, player.position.y, _depth);
+            transform.position = new Vector3(player.position.x, player.position.y, _depth);
         }
 
         if (_isPlayerGettingOut && dist > 1.5f * focusRadius)
