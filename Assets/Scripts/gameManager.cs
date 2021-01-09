@@ -44,9 +44,9 @@ public class gameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
-            ExitFocus();
+
     }
+    
 
 
     public void SetRespawnState(GameObject gameObject, Vector3 position, Vector3 velocity, float rotation)
