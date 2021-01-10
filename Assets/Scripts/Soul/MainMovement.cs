@@ -20,8 +20,6 @@ public class MainMovement : MonoBehaviour
     [SerializeField] private LayerMask trapLayer;
     [SerializeField] private float horizontalMoveRate;
     [SerializeField] private float jumpMoveRate;
-    // [SerializeField] private float maximumBodyCount; //The jump maximum height should be defined by a multiple of the character's height;
-    // [SerializeField] private float fallMoveRate;
     [SerializeField] private float deathHeight = -10; //TALVEZ TENHA QUE MUDAR DEPOIS
     [SerializeField] private float DEFAULT_coyoteTime;
     [SerializeField] private float DEFAULT_jumpBuffer;
@@ -33,16 +31,16 @@ public class MainMovement : MonoBehaviour
     [SerializeField] private float jumpHDampingTurn;
     [SerializeField] private float jumpCut;
     [SerializeField] private float freeFallForce;
-     
+
     private Rigidbody2D _rb;
     private BoxCollider2D _boxCollider;
     private CapsuleCollider2D _capsuleCollider;
     private MoveState _moveState;
+    private Animator _animator;
     private float _coyoteTime;
     private float _jumpBuffer;
-    // private float _maximumJumpHeight;
+    private int _numberOfJumps;
     private bool _canJump;
-    // private bool _isOnAir;
     private bool _areMovementsDamped;
     
     
@@ -51,12 +49,10 @@ public class MainMovement : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        // _rb.gravityScale = 0;
         _boxCollider = GetComponent<BoxCollider2D>();
         _areMovementsDamped = true;
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
-        // _coyoteTime = DEFAULT_coyoteTime;
-        // jumpHDampingBasic = hDampingBasic + 0.1f;
+        _animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -118,6 +114,8 @@ public class MainMovement : MonoBehaviour
         
         
         _canJump = _boxCollider.IsTouchingLayers(groundLayer) || _coyoteTime > 0;
+        _animator.SetBool("Can Jump", _canJump);
+
 
         _jumpBuffer -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
@@ -129,7 +127,7 @@ public class MainMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpMoveRate);
             _coyoteTime = 0;
-
+            _animator.SetBool("Has Jumped Once", true);
         }
 
         if (Input.GetButtonUp("Jump"))
